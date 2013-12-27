@@ -48,8 +48,7 @@ public class Client {
     YarnClientApplication app = yarnClient.createApplication();
 
     // Set up the container launch context for the application master
-    ContainerLaunchContext amContainer = 
-        Records.newRecord(ContainerLaunchContext.class);
+    ContainerLaunchContext amContainer = Records.newRecord(ContainerLaunchContext.class);
     amContainer.setCommands(
         Collections.singletonList(
             "$JAVA_HOME/bin/java" +
@@ -57,9 +56,8 @@ public class Client {
             " com.sansthal.hadoop.yarn.ApplicationMaster" +
             " " + command +
             " " + String.valueOf(n) +
-            // " 1>" + ApplicationConstants.LOG_DIR_EXPANSION_VAR + "/stdout" + 
-            // " 2>" + ApplicationConstants.LOG_DIR_EXPANSION_VAR + "/stderr" 
-	    " >/tmp/stdouterr 2>&1 " // ... for easier debugging ...
+            " 1>" + ApplicationConstants.LOG_DIR_EXPANSION_VAR + "/stdouterr_cl" + 
+            " 2>&1"
             )
         );
     
@@ -89,7 +87,7 @@ public class Client {
 
     // Submit application
     ApplicationId appId = appContext.getApplicationId();
-    System.out.println("Submitting application " + appId);
+    System.out.println("=> Submitting Application " + appId);
     yarnClient.submitApplication(appContext);
     
     ApplicationReport appReport = yarnClient.getApplicationReport(appId);
@@ -102,11 +100,8 @@ public class Client {
       appState = appReport.getYarnApplicationState();
     }
     
-    System.out.println(
-        "Application " + appId + " finished with" +
-    		" state " + appState + 
-    		" at " + appReport.getFinishTime());
-
+    System.out.println("=> Application " + appId + " finished with" +
+    		" state " + appState + " at " + appReport.getFinishTime());
   }
   
   private void setupAppMasterJar(Path jarPath, LocalResource appMasterJar) throws IOException {

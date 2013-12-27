@@ -36,9 +36,7 @@ public class ApplicationMaster {
     nmClient.start();
 
     // Register with ResourceManager
-    System.out.println("registerApplicationMaster 0");
     rmClient.registerApplicationMaster("", 0, "");
-    System.out.println("registerApplicationMaster 1");
     
     // Priority for worker containers - priorities are intra-application
     Priority priority = Records.newRecord(Priority.class);
@@ -50,9 +48,9 @@ public class ApplicationMaster {
     capability.setVirtualCores(1);
 
     // Make container requests to ResourceManager
-    for (int i = 0; i < n; ++i) {
+    for (int i=1; i <= n; i++) {
       ContainerRequest containerAsk = new ContainerRequest(capability, null, null, priority);
-      System.out.println("Making res-req " + i);
+      System.out.println("=> Container Request " + i);
       rmClient.addContainerRequest(containerAsk);
     }
 
@@ -66,31 +64,25 @@ public class ApplicationMaster {
         // Launch container by create ContainerLaunchContext
         ContainerLaunchContext ctx = 
             Records.newRecord(ContainerLaunchContext.class);
-        ctx.setCommands(
-            Collections.singletonList(
+        ctx.setCommands(Collections.singletonList(
                 command + 
-                " 1>" + ApplicationConstants.LOG_DIR_EXPANSION_VAR + "/stdout" + 
-                " 2>" + ApplicationConstants.LOG_DIR_EXPANSION_VAR + "/stderr" 
+                " >" + ApplicationConstants.LOG_DIR_EXPANSION_VAR + "/stdouterr_am" + 
+                " 2>&1"
                 ));
-        System.out.println("Launching container " + allocatedContainers);
+        System.out.println("=> Launching Container " + allocatedContainers);
         nmClient.startContainer(container, ctx);
       }
       Thread.sleep(100);
     }
 
-    // Now wait for containers to complete
-    int completedContainers = 0;
-    while (completedContainers < n) {
-      AllocateResponse response = rmClient.allocate(completedContainers/n);
-      for (ContainerStatus status : response.getCompletedContainersStatuses()) {
-        ++completedContainers;
-        System.out.println("Completed container " + completedContainers + " with status: " + status);
-      }
-      Thread.sleep(100);
+    // Now work with containers
+    for (int container = 0; container < n; container++) {
+      rmClient.allocate(0);
     }
 
     // Un-register with ResourceManager
     rmClient.unregisterApplicationMaster(
         FinalApplicationStatus.SUCCEEDED, "", "");
   }
+
 }

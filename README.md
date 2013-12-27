@@ -1,29 +1,26 @@
 hadoop-yarn
 ===========
 
-Simple Hadoop Yarn
+Simple Hadoop Yarn Application
 
 Tested on -
 
-ProductName:	Mac OS X<br>
-ProductVersion:	10.9<br>
-BuildVersion:	13A603<br>
+Mac OS X 10.9 using java version "1.7.0_40"
 
-and
-
-Hortonworks Sandbox Version 2.0<br>
-(http://hortonworks.com/products/hortonworks-sandbox/)
-
-NOTE: Used Hadoop 3.0.0-SNAPSHOT jars
+and Hortonworks Sandbox Version 2.0<br>
+(http://hortonworks.com/products/hortonworks-sandbox/)<br>
+using java version "1.6.0_24"
 
 PREREQ:<br>
 You need to have installed Hadoop 2 on your Mac,<br>
 or be using Hortonworks Sandbox Version 2.0<br>
 
-NOTE: Prior knowledge of Hadoop source code,<br>
+NOTE:<br>
+Prior knowledge of Hadoop source code,<br>
 especially within this area helps -<br>
 hadoop-common/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications
 
 RUNNING:<br>
-Just run the BASH script (run-simple-yarn-app.sh)
+Just run the BASH script (run-simple-yarn-app.sh)<br>
+It will do a clean maven compile, and then run the yarn client.
 
