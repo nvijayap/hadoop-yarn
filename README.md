@@ -25,7 +25,7 @@ Just run the BASH script (run-simple-yarn-app.sh)<br>
 It will do a maven build, and then run the yarn client.
 
 USAGE:<br>
-$ ./run-simple-yarn-app.sh
+$ ./run-simple-yarn-app.sh<br>
 => Usage: ./run-simple-yarn-app.sh -c <unix_command> -n <number_of_yarn_containers>
 
 SAMPLE RUN:<br>
