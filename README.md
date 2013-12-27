@@ -22,5 +22,12 @@ hadoop-common/hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications
 
 RUNNING:<br>
 Just run the BASH script (run-simple-yarn-app.sh)<br>
-It will do a clean maven compile, and then run the yarn client.
+It will do a maven build, and then run the yarn client.
+
+USAGE:<br>
+$ ./run-simple-yarn-app.sh
+=> Usage: ./run-simple-yarn-app.sh -c <unix_command> -n <number_of_yarn_containers>
+
+SAMPLE RUN:<br>
+$ ./run-simple-yarn-app.sh -c /usr/bin/who -n 9
 
