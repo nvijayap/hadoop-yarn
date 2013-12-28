@@ -42,10 +42,10 @@ export HADOOP_CLASSPATH=target/classes
 OS_NAME=$(uname -s)
 echo; echo "=> Running the simple yarn app ..."
 if [ "$OS_NAME" == "Darwin" ]; then
-  time yarn com.sansthal.hadoop.yarn.Client ${c} ${n} \
+  time yarn com.sansthal.hadoop.yarn.Client "${c}" "${n}" \
   hdfs://localhost:9000/apps/simple-hadoop-yarn-1.0-SNAPSHOT.jar
 elif [ "$OS_NAME" == "Linux" ]; then        # Hortonworks Sandbox Version 2
-  time yarn com.sansthal.hadoop.yarn.Client ${c} ${n} \
+  time yarn com.sansthal.hadoop.yarn.Client "${c}" "${n}" \
   hdfs://sandbox.hortonworks.com:8020/apps/simple-hadoop-yarn-1.0-SNAPSHOT.jar
 else
   echo "=> Not Tested on ${OS_NAME}!"

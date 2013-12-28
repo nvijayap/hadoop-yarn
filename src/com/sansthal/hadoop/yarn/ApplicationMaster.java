@@ -21,9 +21,16 @@ public class ApplicationMaster {
 
   public static void main(String[] args) throws Exception {
 
-    final String command = args[0];
-    final int n = Integer.valueOf(args[1]);
-    
+    String command = args[0];
+
+    int argi = 0;
+
+    for (argi=1; argi<args.length - 1; argi++) {
+      command += " " + args[argi];
+    }
+
+    final int n = Integer.valueOf(args[argi]);
+
     // Initialize clients to ResourceManager and NodeManagers
     Configuration conf = new YarnConfiguration();
 

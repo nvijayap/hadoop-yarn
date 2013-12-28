@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+require 'mail'
+
+if ARGV.count != 2
+  puts "=> Need un, pw as args"
+  exit
+end
+
+un = ARGV[0]
+pw = ARGV[1]
+
+# Set up delivery defaults to use Gmail
+Mail.defaults do
+  delivery_method :smtp, {
+    :address => 'smtp.gmail.com',
+    :port => '587',
+    :user_name => un,
+    :password => pw,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+end
+ 
+# Send email with attachment.
+mail = Mail.new do
+  from     un
+  to       un
+  subject  'Happy New Year!'
+  body     "Hi,\n\n  Happy New Year!\n\nYour Well Wisher\n"
+end
+ 
+# Don't forget delivery
+mail.deliver!
+
+puts "=> Sent Email at #{Time.now}"
