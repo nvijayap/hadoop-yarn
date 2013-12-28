@@ -34,9 +34,9 @@ $ ./run-simple-yarn-app.sh<br>
 $ ./run-simple-yarn-app.sh -c /usr/bin/who -n 9
 
 <b>EXTRAS (Use Case: Send Email)</b>:<br>
-Want to send email from all the yarn Containers?<br>
+Want to send email from all the Yarn Containers?<br>
 Place the sendemail ruby script in accessible location<br>
 (/bin, /usr/bin, or some other standard location of PATH,<br>
 or mention the full path in run script).<br>
-$ ./run-simple-yarn-app.sh -c 'sendemail <your_email_address> <your_email_password>' -n 9
+$ ./run-simple-yarn-app.sh -c 'sendemail &lt;your_email_address&gt; &lt;your_email_password&gt;' -n 9
 
