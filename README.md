@@ -33,10 +33,14 @@ $ ./run-simple-yarn-app.sh<br>
 <b>SAMPLE RUN</b>:<br>
 $ ./run-simple-yarn-app.sh -c /usr/bin/who -n 9
 
-<b>EXTRAS (Use Case: Send Email)</b>:<br>
+<b>EXTRAS_1 (Use Case: Send Email Demo)</b>:<br>
 Want to send email from all the Yarn Containers?<br>
 Place the sendemail ruby script in accessible location<br>
 (/bin, /usr/bin, or some other standard location of PATH,<br>
 or mention the full path in run script).<br>
 $ ./run-simple-yarn-app.sh -c 'sendemail &lt;your_email_address&gt; &lt;your_email_password&gt;' -n 9
+
+<b>EXTRAS_2 (Use Case: Let Yarn Container run MapReduce Job)</b>:<br>
+Want to run WordCount MapReduce job under Yarn by dedicating a container for it?<br>
+$ ./run-simple-yarn-app.sh -c "/bin/cp \$LOCAL_DIRS/*/appMaster.jar /tmp\; hadoop --config /tmp/hadoop_mr_cfg jar /tmp/appMaster.jar com.hw.yarn.WordCount in out" -n 1
 
